@@ -39,7 +39,7 @@ case $kernel_version in
     *) ksu_supported=false ;;
 esac
 
-ui_print "内核构建者: Coolapk@cctv18"
+ui_print "内核构建者: Coolapk@Ericlin05"
 ui_print " " "  -> ksu_supported: $ksu_supported"
 $ksu_supported || abort "  -> Non-GKI device, abort."
 
@@ -52,17 +52,3 @@ else
     write_boot # use flash_boot to skip ramdisk repack, e.g. for devices with init_boot ramdisk
 fi
 ## end boot install
-# 优先选择模块路径
-if [ -f "$AKHOME/zram.zip" ]; then
-    MODULE_PATH="$AKHOME/zram.zip"
-    KSUD_PATH="/data/adb/ksud"
-    if [ -f "$KSUD_PATH" ]; then
-        ui_print "Installing zram Module..."
-        /data/adb/ksud module install "$MODULE_PATH"
-        ui_print "Installation Complete!"
-    else
-        ui_print "KSUD Not Found, skipping installation..."
-    fi
-else
-    ui_print "ZRAM module Not Found, skipping ZRAM module installation"
-fi
